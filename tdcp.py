@@ -3,28 +3,44 @@ A = {101, 102, 103, 104, 105, 106}
 B = {104, 105, 106, 107, 108}
 C = {102, 105, 109}
 
-print("\n********** ANALISIS DE CONJUNTOS **********")
+print("\n********** LOGICA PROPOSICIONAL **********")
 
-# Intersección
-interseccion = A & B
+# TABLA DE VERDAD
+print("p\tq\tr\t(p∨q)∧r")
 
-print("\nUsuarios que usan ambas plataformas:")
-print("A ∩ B =", interseccion)
+valores = [False, True]
 
-# Unión
-union = A | B
+for p in valores:
+    for q in valores:
+        for r in valores:
 
-print("\nUsuarios registrados en al menos una plataforma:")
-print("A ∪ B =", union)
+            resultado = (p or q) and r
 
-# Usuarios sin errores
-sin_errores = union - C
+            print(f"{p}\t{q}\t{r}\t{resultado}")
 
-print("\nUsuarios sin errores:")
-print("(A ∪ B) - C =", sin_errores)
+# FUNCIÓN LÓGICA
+def usuario_critico(p, q, r):
+    return (p or q) and r
 
-# Usuarios sospechosos
-sospechosos = C - union
+# CLASIFICACIÓN
+todos = A | B | C
 
-print("\nUsuarios sospechosos:")
-print("C - (A ∪ B) =", sospechosos)
+criticos = []
+no_criticos = []
+
+for usuario in todos:
+
+    p = usuario in A
+    q = usuario in B
+    r = usuario in C
+
+    if usuario_critico(p, q, r):
+        criticos.append(usuario)
+    else:
+        no_criticos.append(usuario)
+
+print("\nUsuarios críticos:")
+print(criticos)
+
+print("\nUsuarios no críticos:")
+print(no_criticos)
