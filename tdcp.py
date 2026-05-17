@@ -3,20 +3,23 @@ A = {101, 102, 103, 104, 105, 106}
 B = {104, 105, 106, 107, 108}
 C = {102, 105, 109}
 
-print("\n********** LOGICA PROPOSICIONAL **********")
+print("\n********** ANALISIS COMPLETO **********")
 
-# TABLA DE VERDAD
-print("p\tq\tr\t(p∨q)∧r")
+# Operaciones de conjuntos
+print("\nUsuarios en ambas plataformas:")
+print(A & B)
 
-valores = [False, True]
+print("\nUsuarios registrados en plataformas:")
+print(A | B)
 
-for p in valores:
-    for q in valores:
-        for r in valores:
+print("\nUsuarios sin errores:")
+print((A | B) - C)
 
-            resultado = (p or q) and r
+print("\nUsuarios exclusivos de una plataforma:")
+print((A - B) | (B - A))
 
-            print(f"{p}\t{q}\t{r}\t{resultado}")
+print("\nUsuarios sospechosos:")
+print(C - (A | B))
 
 # FUNCIÓN LÓGICA
 def usuario_critico(p, q, r):
@@ -44,3 +47,12 @@ print(criticos)
 
 print("\nUsuarios no críticos:")
 print(no_criticos)
+
+# INTERPRETACIÓN
+print("\nINTERPRETACION")
+
+print("\nLos usuarios críticos representan mayor riesgo")
+print("porque utilizan plataformas y generan errores.")
+
+print("\nLos usuarios sospechosos generan errores")
+print("pero no figuran registrados en API o WEB.")
