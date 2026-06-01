@@ -9,7 +9,7 @@ def B(x):
 def C(x):
     return -2 * (x ** 2) + 80 * x + 100 # 𝐶(𝑥) = −2𝑥² + 80𝑥 + 100
 
-print("********** PARTE A — ANÁLISIS MATEMÁTICO **********")
+print("********** PARTE A — ANÁLISIS MATEMÁTICO **********") # PARTE A — ANÁLISIS MATEMÁTICO
 
 # 1) Pendiente y ordenada al origen
 pendiente_A = 40
@@ -24,6 +24,7 @@ print(f"Pendiente de B: {pendiente_B}", (f"\nOrdenada al origen de B: {ordenada_
 
 # 2) Paralelismo
 print("\n2) ¿SON PARALELAS?")
+
 if pendiente_A == pendiente_B:
     print("Las rectas SON paralelas.")
 else:
@@ -31,43 +32,54 @@ else:
 
 # 3) Punto de intersección entre A y B
 print("\n3) PUNTO DE INTERSECCIÓN ENTRE A Y B")
+
 x_inter = (ordenada_A - ordenada_B) / (pendiente_B - pendiente_A)
 y_inter = A(x_inter)
+
 print(f"x = {x_inter}")
 print(f"y = {y_inter}")
 
-# 4) Función C
+# 4) Función 
 print("\n4) ANÁLISIS DE LA FUNCIÓN C")
+
+# Vértice
 a = -2
 b = 80
 c = 100
 xv = -b / (2 * a)
 yv = C(xv)
-print("\nVÉRTICE")
+
+print("\nVÉRTICE") # Vértices
 print(f"xv = {xv}")
 print(f"yv = {yv}")
+print("\nRAÍCES") # Raíces
 
-print("\nRAÍCES")
 discriminante = b**2 - 4*a*c
+
 if discriminante >= 0:
     raiz1 = (-b + math.sqrt(discriminante)) / (2 * a)
     raiz2 = (-b - math.sqrt(discriminante)) / (2 * a)
+
     print(f"Raíz 1 = {raiz1}")
     print(f"Raíz 2 = {raiz2}")
 else:
     print("La función no tiene raíces reales.")
 
-print("\n********** PARTE B — IMPLEMENTACIÓN **********")
+print("\n********** PARTE B — IMPLEMENTACIÓN **********") # PARTE B — IMPLEMENTACIÓN
 
 # 7) Evaluar funciones
 print("\n7) EVALUACIÓN DE FUNCIONES")
+
 valores = [0, 5, 10, 15, 20, 25, 30, 40, 50]
+
 print("\n{:<10} {:<15} {:<15} {:<15}".format("x", "A(x)", "B(x)", "C(x)"))
+
 for x in valores:
     print("{:<10} {:<15} {:<15} {:<15}".format(x, A(x), B(x), C(x)))
 
 # 8) Plan más económico
 print("\n8) PLAN MÁS ECONÓMICO")
+
 def plan_mas_barato(x):
     costos = {
         "Plan A": A(x),
@@ -75,7 +87,9 @@ def plan_mas_barato(x):
         "Plan C": C(x)
     }
     minimo = min(costos.values())
+
     mejores = []
+
     for plan, costo in costos.items():
         if costo == minimo:
             mejores.append(plan)
@@ -87,19 +101,23 @@ for x in valores:
     print(f"El Plan más económico es: {planes}")
     print(f"Costo mínimo: {costo}")
 
-print("\n********** PARTE C — ANÁLISIS **********")
+print("\n********** PARTE C — ANÁLISIS **********") # PARTE C — ANÁLISIS
 
 # 9) Determinar qué plan conviene
 print("\n9) ¿QUÉ PLAN CONVIENE?")
+
 for x in valores:
     planes, costo = plan_mas_barato(x)
     print(f"Para las {x} horas conviene el {planes} con costo de: {costo}")
 
 # 10) Valores negativos de C
 print("\n10) COSTOS NEGATIVOS EN C")
+
 negativos = []
+
 for x in range(0, 51):
     valor = C(x)
+
     if valor < 0:
         negativos.append((x, valor))
 
@@ -110,16 +128,12 @@ if negativos:
 else:
     print("No hay valores negativos en el dominio.")
 
-print("\nEXPLICACIÓN:")
-print("Un costo negativo significa que la empresa estaría pagando al cliente en lugar de cobrarle. "
-      "Eso representa un problema real porque:\n "
-      "- La empresa tendría pérdidas económicas.\n "
-      "- El modelo matemático deja de ser válido para ciertos valores.\n "
-      "- En un sistema real no puede existir un costo negativo.\n "
-      "Por eso es importante analizar el dominio y validar los resultados obtenidos por las funciones.\n")
+print("\nEXPLICACIÓN:") # Explicación del problema real
+print("Un costo negativo significa que la empresa estaría pagando al cliente en lugar de cobrarle. \nEso representa un problema real porque:\n \n- La empresa tendría pérdidas económicas. \n- El modelo matemático deja de ser válido para ciertos valores. \n- En un sistema real no puede existir un costo negativo.\n \nPor eso es importante analizar el dominio y validar los resultados obtenidos por las funciones.\n")
 
 # 6) Graficar funciones
 x_vals = list(range(0, 51))
+
 yA = [A(x) for x in x_vals]
 yB = [B(x) for x in x_vals]
 yC = [C(x) for x in x_vals]
