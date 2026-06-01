@@ -1,81 +1,136 @@
 import math
+import matplotlib.pyplot as plt
 
+# FUNCIONES
 def A(x):
-    return 40 * x + 200
-
+    return 40 * x + 200 # 𝐴(𝑥) = 40𝑥 + 200
 def B(x):
-    return 70 * x + 50
-
+    return 70 * x + 50 # 𝐵(𝑥) = 70𝑥 + 50
 def C(x):
-    return -2 * (x ** 2) + 80 * x + 100
+    return -2 * (x ** 2) + 80 * x + 100 # 𝐶(𝑥) = −2𝑥² + 80𝑥 + 100
 
 print("********** PARTE A — ANÁLISIS MATEMÁTICO **********")
 
-# (Todo el análisis matemático de v2 se mantiene aquí...)
-pendiente_A, ordenada_A = 40, 200
-pendiente_B, ordenada_B = 70, 50
-print("\n1) Pendiente y ordenada al origen")
-print(f"A: pendiente {pendiente_A}, ordenada {ordenada_A}")
-print(f"B: pendiente {pendiente_B}, ordenada {ordenada_B}")
+# 1) Pendiente y ordenada al origen
+pendiente_A = 40
+ordenada_A = 200
+pendiente_B = 70
+ordenada_B = 50
 
-print("\n2) ¿Son paralelas?")
-print("No son paralelas." if pendiente_A != pendiente_B else "Sí son paralelas.")
+print("\n1) PENDIENTE Y ORDENADA AL ORIGEN")
+print(f"A(x) = 40x + 200", (f"\nPendiente de A: {pendiente_A}"))
+print(f"Ordenada al origen de A: {ordenada_A}\n", (f"\nB(x) = 70x + 50"))
+print(f"Pendiente de B: {pendiente_B}", (f"\nOrdenada al origen de B: {ordenada_B}"))
 
+# 2) Paralelismo
+print("\n2) ¿SON PARALELAS?")
+if pendiente_A == pendiente_B:
+    print("Las rectas SON paralelas.")
+else:
+    print("Las rectas NO son paralelas.")
+
+# 3) Punto de intersección entre A y B
+print("\n3) PUNTO DE INTERSECCIÓN ENTRE A Y B")
 x_inter = (ordenada_A - ordenada_B) / (pendiente_B - pendiente_A)
 y_inter = A(x_inter)
-print(f"\n3) Intersección A y B: x = {x_inter}, y = {y_inter}")
+print(f"x = {x_inter}")
+print(f"y = {y_inter}")
 
-a, b, c = -2, 80, 100
-xv = -b / (2*a)
+# 4) Función C
+print("\n4) ANÁLISIS DE LA FUNCIÓN C")
+a = -2
+b = 80
+c = 100
+xv = -b / (2 * a)
 yv = C(xv)
-print(f"\n4) Vértice de C: ({xv}, {yv})")
+print("\nVÉRTICE")
+print(f"xv = {xv}")
+print(f"yv = {yv}")
+
+print("\nRAÍCES")
 discriminante = b**2 - 4*a*c
-raiz1 = (-b + math.sqrt(discriminante)) / (2*a)
-raiz2 = (-b - math.sqrt(discriminante)) / (2*a)
-print(f"Raíces de C: {raiz1:.2f}, {raiz2:.2f}")
+if discriminante >= 0:
+    raiz1 = (-b + math.sqrt(discriminante)) / (2 * a)
+    raiz2 = (-b - math.sqrt(discriminante)) / (2 * a)
+    print(f"Raíz 1 = {raiz1}")
+    print(f"Raíz 2 = {raiz2}")
+else:
+    print("La función no tiene raíces reales.")
 
-print("\n********** PARTE B — COMPARACIÓN DE PLANES **********")
+print("\n********** PARTE B — IMPLEMENTACIÓN **********")
 
-# Función para encontrar el plan más barato
-def plan_mas_barato(x):
-    """
-    Devuelve el/los planes con menor costo para un valor de x dado.
-    Retorna una tupla (planes, costo_minimo)
-    """
-    costos = {
-        'A': A(x),
-        'B': B(x),
-        'C': C(x)
-    }
-    
-    costo_minimo = min(costos.values())
-    planes_minimos = [plan for plan, costo in costos.items() if costo == costo_minimo]
-    
-    return planes_minimos, costo_minimo
-
-# Evaluación de los nueve valores solicitados
+# 7) Evaluar funciones
+print("\n7) EVALUACIÓN DE FUNCIONES")
 valores = [0, 5, 10, 15, 20, 25, 30, 40, 50]
-
-print("\n1) Tabla de comparación de costos para cada plan:")
-print("-" * 65)
-print(f"{'x':<6} {'Plan A':<12} {'Plan B':<12} {'Plan C':<12} {'Mejor Plan':<15}")
-print("-" * 65)
-
-mejores_planes = {}
+print("\n{:<10} {:<15} {:<15} {:<15}".format("x", "A(x)", "B(x)", "C(x)"))
 for x in valores:
-    costo_a = A(x)
-    costo_b = B(x)
-    costo_c = C(x)
-    
-    planes_baratos, costo_min = plan_mas_barato(x)
-    mejores_planes[x] = (planes_baratos, costo_min)
-    
-    planes_str = "/".join(planes_baratos)
-    print(f"{x:<6} ${costo_a:<11.2f} ${costo_b:<11.2f} ${costo_c:<11.2f} {planes_str} (${costo_min:.2f})")
+    print("{:<10} {:<15} {:<15} {:<15}".format(x, A(x), B(x), C(x)))
 
-print("\n2) Resumen: Plan más económico para cada valor de x")
-print("-" * 50)
+# 8) Plan más económico
+print("\n8) PLAN MÁS ECONÓMICO")
+def plan_mas_barato(x):
+    costos = {
+        "Plan A": A(x),
+        "Plan B": B(x),
+        "Plan C": C(x)
+    }
+    minimo = min(costos.values())
+    mejores = []
+    for plan, costo in costos.items():
+        if costo == minimo:
+            mejores.append(plan)
+    return mejores, minimo
+
 for x in valores:
-    planes, costo = mejores_planes[x]
-    planes_str = " o ".join(["Plan " + p for p in planes])
-    print(f"x = {x:2d} unidades → {planes_str:20} | ${costo:7.2f}")
+    planes, costo = plan_mas_barato(x)
+    print(f"\nCuando x = {x} horas:")
+    print(f"El Plan más económico es: {planes}")
+    print(f"Costo mínimo: {costo}")
+
+print("\n********** PARTE C — ANÁLISIS **********")
+
+# 9) Determinar qué plan conviene
+print("\n9) ¿QUÉ PLAN CONVIENE?")
+for x in valores:
+    planes, costo = plan_mas_barato(x)
+    print(f"Para las {x} horas conviene el {planes} con costo de: {costo}")
+
+# 10) Valores negativos de C
+print("\n10) COSTOS NEGATIVOS EN C")
+negativos = []
+for x in range(0, 51):
+    valor = C(x)
+    if valor < 0:
+        negativos.append((x, valor))
+
+if negativos:
+    print("\nValores donde C(x) es negativo:")
+    for x, valor in negativos:
+        print(f"x = {x} ---> C(x) = {valor}")
+else:
+    print("No hay valores negativos en el dominio.")
+
+print("\nEXPLICACIÓN:")
+print("Un costo negativo significa que la empresa estaría pagando al cliente en lugar de cobrarle. "
+      "Eso representa un problema real porque:\n "
+      "- La empresa tendría pérdidas económicas.\n "
+      "- El modelo matemático deja de ser válido para ciertos valores.\n "
+      "- En un sistema real no puede existir un costo negativo.\n "
+      "Por eso es importante analizar el dominio y validar los resultados obtenidos por las funciones.\n")
+
+# 6) Graficar funciones
+x_vals = list(range(0, 51))
+yA = [A(x) for x in x_vals]
+yB = [B(x) for x in x_vals]
+yC = [C(x) for x in x_vals]
+
+plt.figure(figsize=(12, 6))
+plt.plot(x_vals, yA, label="A(x) = 40x + 200")
+plt.plot(x_vals, yB, label="B(x) = 70x + 50")
+plt.plot(x_vals, yC, label="C(x) = -2x² + 80x + 100")
+plt.title("Análisis de Costos de Desarrollo")
+plt.xlabel("Horas mensuales")
+plt.ylabel("Costo")
+plt.grid(True)
+plt.legend()
+plt.show()
