@@ -38,18 +38,46 @@ if columnas_M == filas_C:
 else:
     print("\nNO se puede calcular M * C")
 
-# PARTE B — IMPLEMENTACIÓN (parcial)
+# PARTE B — IMPLEMENTACIÓN
 print("\n********** PARTE B — IMPLEMENTACIÓN **********")
 print("\n3) PROMEDIOS")
-
-# Promedio por función (filas)
 promedio_funciones = np.mean(M, axis=1)
 print("\nTiempo promedio por función:")
 for i, promedio in enumerate(promedio_funciones, start=1):
     print(f"Función {i}: {promedio:.2f} ms")
 
-# Promedio por servidor (columnas)
 promedio_servidores = np.mean(M, axis=0)
 print("\nTiempo promedio por servidor:")
 for i, promedio in enumerate(promedio_servidores, start=1):
     print(f"Servidor {i}: {promedio:.2f} ms")
+
+# 4) Transpuesta
+print("\n4) MATRIZ TRANSPUESTA")
+M_transpuesta = M.T
+print("\nMatriz transpuesta:")
+print(M_transpuesta)
+print("\nLa matriz transpuesta intercambia filas por columnas.")
+print("Ahora:")
+print("- Las filas representan servidores")
+print("- Las columnas representan funciones")
+
+# PARTE C — PRODUCTO MATRICIAL
+print("\n********** PARTE C — PRODUCTO MATRICIAL **********")
+print("\n5) T = M * C")
+T = np.dot(M, C)
+print(f"\nMatriz T:\n{T}")
+
+# PARTE D — INTERPRETACIÓN CRÍTICA
+print("\n********** PARTE D — INTERPRETACIÓN CRÍTICA **********")
+print("\n6) INTERPRETACIÓN DE T")
+print("\nCada valor de T combina tiempos promedio y cantidades de ejecuciones mediante multiplicación matricial.")
+print("Puede interpretarse como una medida combinada de carga computacional.")
+print("\nSin embargo, el producto matricial no representa directamente una magnitud física clara en este contexto.")
+
+print("\n7) ALTERNATIVA MÁS ADECUADA")
+print("\nUna alternativa más correcta sería realizar multiplicación elemento a elemento.")
+print("De esta manera: Tiempo total = tiempo promedio * cantidad de ejecuciones para cada función y servidor.")
+total_real = M * C
+print("\nMultiplicación elemento a elemento:")
+print(total_real)
+print("\nEsto representa el tiempo total consumido por cada función en cada servidor.")
